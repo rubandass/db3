@@ -33,9 +33,13 @@ select * from Enrolment
 	where e.PaperID IS NULL
 
 4.4	List all the papers that have never been run (according to the data).There are currently none so insert one in order to test the query.
-Insert into Paper values ('IN728', 'Programming5') 
+Insert into Paper values ('IN728', 'Programming5')
+	select * from Paper p
+	left join PaperInstance i on p.PaperID = i.PaperID
+	where i.PaperID IS NULL
 
 4.5	List all the semesters, showing semester start date and length in days, in which IN511 has run.
+	
 
 4.6	Develop a statement that returns all people that enrolled in IN511 
 	in a semester that started on or between 12-Apr-2018 and 13-Aug-2019.
