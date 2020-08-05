@@ -56,3 +56,20 @@ e8.4	Imagine a strange path-of-study requirement: in semester 2020S2
 		2. Find IN605/2019S2 enrolments that are not in IN612
 		3. insert new enrolments
 
+		select * from Enrolment e
+		join
+		(select e1.paperID, e1.SemesterID, e1.PersonID from
+		(select * from Enrolment
+		where PaperID = 'IN605') as e1
+		join
+		(select * from Enrolment
+		where PaperID = 'IN612') as e2 on e1.PersonID = e2.personID) as e3 on e.PersonID = e3.PersonID
+
+		select e1.personID from Enrolment e1
+		where e1.PersonID NOT IN (select e2.personID from Enrolment e2
+		where e2.PaperID = 'IN605')
+
+		select * from
+		(select * from Enrolment
+		where PaperID = 'IN612') as e where e.PersonID IN (select e2.personID from Enrolment e2
+		where e2.PaperID = 'IN605')
